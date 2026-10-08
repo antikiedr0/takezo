@@ -6,6 +6,7 @@ export type User = {
   id: number
   email: string
   name: string
+  avatarUrl: string | null
 }
 
 type AuthContextValue = {
@@ -14,6 +15,9 @@ type AuthContextValue = {
   login: (email: string, password: string) => Promise<void>
   register: (email: string, password: string, name: string) => Promise<void>
   logout: () => Promise<void>
+  // Ustawienia konta zmieniaja te same dane, ktore trzyma sesja - po zapisie
+  // podmieniamy je tutaj, zeby naglowek od razu pokazal nowy nick i zdjecie.
+  applyUser: (user: User) => void
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null)
@@ -56,7 +60,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, applyUser: setUser }}>
       {children}
     </AuthContext.Provider>
   )

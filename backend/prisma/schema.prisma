@@ -15,15 +15,98 @@ model User {
   email     String   @unique
   password  String
   name      String
+  avatarUrl String?
   createdAt DateTime @default(now())
-  tasks     Task[]
+
+  projects Project[]
+  goals    DailyGoal[]
+  xpEvents XpEvent[]
 }
 
-model Task {
+model Project {
+  id           Int       @id @default(autoincrement())
+  name         String
+  description  String?
+  createdAt    DateTime  @default(now())
+  lastOpenedAt DateTime  @default(now())
+  archivedAt   DateTime?
+
+  userId Int
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  topics Topic[]
+
+  @@index([userId, lastOpenedAt])
+}
+
+model Topic {
+  id          Int         @id @default(autoincrement())
+  name        String
+  status      TopicStatus @default(TODO)
+  position    Int
+  createdAt   DateTime    @default(now())
+  completedAt DateTime?
+
+  projectId Int
+  project   Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  messages  ChatMessage[]
+  goals     DailyGoal[]
+
+  @@index([projectId, position])
+}
+
+model DailyGoal {
+  id        Int       @id @default(autoincrement())
+  text      String
+  day       DateTime  @db.Date
+  doneAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  userId  Int
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  topicId Int?
+  topic   Topic? @relation(fields: [topicId], references: [id], onDelete: SetNull)
+
+  @@index([userId, day])
+}
+
+model XpEvent {
   id        Int      @id @default(autoincrement())
-  name      String
-  done      Boolean  @default(false)
+  amount    Int
+  reason    XpReason
+  day       DateTime @db.Date
   createdAt DateTime @default(now())
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id])
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, reason, day])
+  @@index([userId, createdAt])
+}
+
+model ChatMessage {
+  id        Int      @id @default(autoincrement())
+  role      ChatRole
+  content   String
+  createdAt DateTime @default(now())
+
+  topicId Int
+  topic   Topic @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+  @@index([topicId, createdAt])
+}
+
+enum TopicStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+}
+
+enum XpReason {
+  DAY_CLOSED
+  TOPIC_DONE
+}
+
+enum ChatRole {
+  USER
+  ASSISTANT
 }

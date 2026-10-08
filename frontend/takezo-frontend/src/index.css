@@ -1,110 +1,246 @@
 :root {
+  --bg: #0a1220;
+  --panel: #0c1527;
+  --card: #101c33;
+  --card-2: #0e192c;
+  --raise: #13213c;
+  --line: #1b2a47;
+  --border: #223151;
+  --border-soft: #2a3a5e;
+  --border-dash: #30436c;
+
   --text: #a7b2c7;
   --text-h: #eef2f8;
-  --bg: #0a1220;
-  --border: #223151;
-  --code-bg: #101c33;
+  --text-muted: #8494b0;
+  --text-dim: #7f8fad;
+
   --accent: #4f83ff;
-  --accent-bg: rgba(79, 131, 255, 0.15);
-  --accent-border: rgba(79, 131, 255, 0.5);
-  --social-bg: rgba(16, 28, 51, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  --accent-soft: rgba(79, 131, 255, 0.16);
+  --accent-text: #c9d9ff;
+  --on-accent: #07101f;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --amber: #f2a541;
+  --amber-soft: rgba(242, 165, 65, 0.14);
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
+  --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --sans: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  --heading: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+
+  font: 15px/1.55 var(--sans);
   color-scheme: dark;
   color: var(--text);
   background: var(--bg);
-  font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 }
 
-#social .button-icon {
-  filter: invert(1) brightness(2);
+/* Motyw ciemny - bez granatu, czysta czern z szarosciami. */
+:root[data-theme='dark'] {
+  --bg: #131314;
+  --panel: #171719;
+  --card: #1e1f20;
+  --card-2: #1a1b1c;
+  --raise: #26282a;
+  --line: #2b2d2f;
+  --border: #2f3133;
+  --border-soft: #3c3f42;
+  --border-dash: #45484b;
+
+  --text: #c4c7c5;
+  --text-h: #f1f3f4;
+  --text-muted: #9aa0a6;
+  --text-dim: #868b90;
+
+  --accent: #8ab4f8;
+  --accent-soft: rgba(138, 180, 248, 0.14);
+  --accent-text: #a8c7fa;
+  --on-accent: #0b1220;
+
+  --amber: #f0b26b;
+  --amber-soft: rgba(240, 178, 107, 0.14);
+
+  color-scheme: dark;
 }
 
-:root[data-theme='light'] {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+/* Motyw lesny - cieple zielenie na gleboko zielonym tle. */
+:root[data-theme='forest'] {
+  --bg: #0b1410;
+  --panel: #0e1a15;
+  --card: #122018;
+  --card-2: #101d17;
+  --raise: #16291f;
+  --line: #1b3326;
+  --border: #22402f;
+  --border-soft: #2d5440;
+  --border-dash: #35604a;
+
+  --text: #a9c4b5;
+  --text-h: #e9f4ee;
+  --text-muted: #85a394;
+  --text-dim: #6f8d7e;
+
+  --accent: #5cc98d;
+  --accent-soft: rgba(92, 201, 141, 0.15);
+  --accent-text: #a7e8c4;
+  --on-accent: #06150e;
+
+  --amber: #e3a857;
+  --amber-soft: rgba(227, 168, 87, 0.14);
+
+  color-scheme: dark;
+}
+
+/* Motyw sliwkowy - fiolety na ciemnym winie. */
+:root[data-theme='plum'] {
+  --bg: #140f1c;
+  --panel: #191326;
+  --card: #1f1830;
+  --card-2: #1b1529;
+  --raise: #2a2040;
+  --line: #2e2446;
+  --border: #3a2d58;
+  --border-soft: #4a3a70;
+  --border-dash: #553f80;
+
+  --text: #bdb0d4;
+  --text-h: #f1ecfa;
+  --text-muted: #9a8cb5;
+  --text-dim: #84769e;
+
+  --accent: #b388ff;
+  --accent-soft: rgba(179, 136, 255, 0.16);
+  --accent-text: #d6c2ff;
+  --on-accent: #140f1c;
+
+  --amber: #e8a852;
+  --amber-soft: rgba(232, 168, 82, 0.14);
+
+  color-scheme: dark;
+}
+
+/* Motyw morski - turkus na glebokiej zieleni morskiej. */
+:root[data-theme='ocean'] {
+  --bg: #07171b;
+  --panel: #0a1f24;
+  --card: #0e272e;
+  --card-2: #0c2229;
+  --raise: #123540;
+  --line: #15404c;
+  --border: #1c4d5a;
+  --border-soft: #276675;
+  --border-dash: #2f7787;
+
+  --text: #a3c2c8;
+  --text-h: #e6f4f6;
+  --text-muted: #7fa5ad;
+  --text-dim: #6c9099;
+
+  --accent: #3ec9d6;
+  --accent-soft: rgba(62, 201, 214, 0.15);
+  --accent-text: #9fe8ef;
+  --on-accent: #04171a;
+
+  --amber: #e8a94f;
+  --amber-soft: rgba(232, 169, 79, 0.14);
+
+  color-scheme: dark;
+}
+
+/* Motyw piaskowy - cieply papier i terakota, do czytania za dnia. */
+:root[data-theme='sand'] {
+  --bg: #faf6ef;
+  --panel: #f3ece0;
+  --card: #fffdf8;
+  --card-2: #f6f0e6;
+  --raise: #efe6d6;
+  --line: #e6dccb;
+  --border: #ded2bd;
+  --border-soft: #cbbda3;
+  --border-dash: #c0b094;
+
+  --text: #5f574a;
+  --text-h: #221d16;
+  --text-muted: #6f6758;
+  --text-dim: #827a6a;
+
+  --accent: #b4552d;
+  --accent-soft: rgba(180, 85, 45, 0.1);
+  --accent-text: #8f4120;
+  --on-accent: #fffdf8;
+
+  --amber: #8a5f10;
+  --amber-soft: rgba(180, 133, 36, 0.16);
+
   color-scheme: light;
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+:root[data-theme='light'] {
+  --bg: #ffffff;
+  --panel: #f7f8fb;
+  --card: #ffffff;
+  --card-2: #f7f8fb;
+  --raise: #eef2fd;
+  --line: #e4e8f2;
+  --border: #e0e5ef;
+  --border-soft: #cdd5e5;
+  --border-dash: #c3cde0;
+
+  --text: #5b6578;
+  --text-h: #0c1527;
+  --text-muted: #6b7488;
+  --text-dim: #7d8699;
+
+  --accent: #2f5fd0;
+  --accent-soft: rgba(47, 95, 208, 0.1);
+  --accent-text: #2f5fd0;
+  --on-accent: #ffffff;
+
+  --amber: #a96610;
+  --amber-soft: rgba(242, 165, 65, 0.16);
+
+  color-scheme: light;
+}
+
+* {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+#root {
+  min-height: 100svh;
 }
 
 h1,
-h2 {
+h2,
+h3 {
   font-family: var(--heading);
-  font-weight: 500;
   color: var(--text-h);
+  margin: 0;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
 p {
   margin: 0;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+a {
+  color: var(--accent-text);
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+code,
+pre {
+  font-family: var(--mono);
 }

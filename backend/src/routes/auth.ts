@@ -27,7 +27,7 @@ authRouter.post('/register', async (req, res) => {
 
   res.cookie(TOKEN_COOKIE, signToken({ userId: user.id }), cookieOptions)
   return res.status(201).json({
-    user: { id: user.id, email: user.email, name: user.name },
+    user: { id: user.id, email: user.email, name: user.name, avatarUrl: user.avatarUrl },
   })
 })
 
@@ -50,7 +50,7 @@ authRouter.post('/login', async (req, res) => {
 
   res.cookie(TOKEN_COOKIE, signToken({ userId: user.id }), cookieOptions)
   return res.status(200).json({
-    user: { id: user.id, email: user.email, name: user.name },
+    user: { id: user.id, email: user.email, name: user.name, avatarUrl: user.avatarUrl },
   })
 })
 
@@ -59,7 +59,7 @@ authRouter.post('/login', async (req, res) => {
 authRouter.get('/me', requireAuth, async (_req, res) => {
   const user = await prisma.user.findUnique({
     where: { id: res.locals.userId },
-    select: { id: true, email: true, name: true },
+    select: { id: true, email: true, name: true, avatarUrl: true },
   })
   if (!user) {
     return res.status(401).json({ error: 'Sesja wygasła' })

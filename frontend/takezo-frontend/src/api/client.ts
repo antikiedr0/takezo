@@ -1,4 +1,5 @@
-const BASE = import.meta.env.VITE_API_URL
+export const API_BASE = import.meta.env.VITE_API_URL
+const BASE = API_BASE
 
 export class ApiError extends Error {
   status: number
@@ -26,6 +27,24 @@ export async function apiFetch<T>(path: string, options: RequestInit = {}): Prom
   if (res.status === 204) {
     return undefined as T
   }
+
+  const body = await res.json().catch(() => ({}))
+
+  if (!res.ok) {
+    throw new ApiError(res.status, body.error ?? `Błąd ${res.status}`)
+  }
+
+  return body as T
+}
+
+// Wysylka pliku idzie jako multipart, wiec NIE ustawiamy Content-Type -
+// przegladarka musi sama dopisac granice (boundary) do naglowka.
+export async function apiUpload<T>(path: string, form: FormData): Promise<T> {
+  const res = await fetch(`${BASE}${path}`, {
+    method: 'POST',
+    credentials: 'include',
+    body: form,
+  })
 
   const body = await res.json().catch(() => ({}))
 

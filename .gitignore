@@ -20,5 +20,3 @@ backend/skills-lock.json
 .DS_Store
 *.log
 
-# odlozone repo innego projektu (cpp-practice), nie nalezy do takezo
-frontend/.git.cpp-practice-backup/
