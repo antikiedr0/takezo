@@ -1,0 +1,24 @@
+# zaleznosci
+node_modules/
+
+# build
+dist/
+backend/lib/
+
+# sekrety i konfiguracja lokalna
+.env
+.env.*
+!.env.example
+
+# skille generowane przez CLI Prismy przy kazdym npm install
+backend/.agents/
+backend/.claude/skills/
+backend/.windsurf/
+backend/skills-lock.json
+
+# system
+.DS_Store
+*.log
+
+# odlozone repo innego projektu (cpp-practice), nie nalezy do takezo
+frontend/.git.cpp-practice-backup/

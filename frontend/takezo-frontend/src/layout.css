@@ -1,0 +1,166 @@
+#root {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  min-height: 100svh;
+  border-inline: none;
+  display: block;
+  text-align: left;
+}
+
+.app-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr minmax(280px, 32%);
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    'header header header'
+    'sidebar main-content topicPanel';
+  min-height: 100svh;
+  width: 100%;
+}
+
+.header {
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.theme-toggle {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+  color: var(--text-h);
+  cursor: pointer;
+  font: inherit;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent-border);
+}
+
+.sidebar {
+  grid-area: sidebar;
+  padding: 24px 16px;
+  border-right: 1px solid var(--border);
+}
+
+.sidebar nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar nav li {
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.sidebar nav li:hover {
+  background-color: var(--accent-bg);
+  color: var(--accent);
+}
+
+.main-content {
+  grid-area: main-content;
+  padding: 24px;
+}
+
+.topicPanel {
+  grid-area: topicPanel;
+  padding: 24px;
+  border-left: 1px solid var(--border);
+}
+
+/* Poniżej 900px: jedna kolumna, wszystko pod sobą (header, sidebar, main, taski) */
+@media (max-width: 900px) {
+  .app-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'header'
+      'topicPanel'
+      'main-content'
+      'sidebar';
+  }
+
+  .sidebar {
+    border-right: none;
+    border-top: 1px solid var(--border);
+  }
+
+  .topicPanel {
+    border-left: none;
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+/* --- ToDoCard --- */
+.todo-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.todo-card h2 {
+  margin-top: 0;
+}
+
+.todo-card form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.todo-card input[type='text'] {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+  font: inherit;
+}
+
+.todo-card input[type='text']:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.todo-card button {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.todo-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.todo-card li {
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--code-bg);
+}
